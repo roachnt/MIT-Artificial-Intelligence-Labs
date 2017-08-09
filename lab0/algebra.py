@@ -173,6 +173,25 @@ def do_multiply(expr1, expr2):
     Look above for details on the Sum and Product classes. The Python operator
     '*' will not help you.
     """
-    # Replace this with your solution.
-    raise NotImplementedError
+    if isinstance(expr1, Sum) and isinstance(expr2, Sum):
+        result = Sum()
+        for val1 in expr1:
+            for val2 in expr2:
+                result.append(Product([val1, val2]))
+        return result.simplify()
+    
+    if isinstance(expr1, Sum) and isinstance(expr2, Product):
+        result = Sum()
+        for val in expr1:
+            result.append(Product([expr2, val]))
+        return result.simplify()
+        
+    if isinstance(expr1, Product) and isinstance(expr2, Sum):
+        result = Sum()
+        for val in expr2:
+            result.append(Product([expr1, val]))
+        return result.simplify()
+    
+    if isinstance(expr1, Product) and isinstance(expr1, Product):
+        return Product([expr1, expr2])
 

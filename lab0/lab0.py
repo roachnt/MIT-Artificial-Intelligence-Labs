@@ -41,8 +41,7 @@ def factorial(x):
     
 
 def count_pattern(pattern, lst):
-    return str(lst).count(str(pattern))
-    
+    return lst.count(pattern)
 
 
 # Problem 2.2: Expression depth
@@ -62,8 +61,7 @@ def depth(expr):
 def tree_ref(tree, index):
     if len(index) == 1:
         return tree[index[0]]
-    else:
-        tree_ref(tree[index[0]], index[1:])
+    return tree_ref(tree[index[0]], index[1:])
 
 
 # Section 3: Symbolic algebra
