@@ -144,7 +144,7 @@ simpsons_data = ("male bart",
 TEST_RESULTS_6 = forward_chain(family_rules,
                                simpsons_data,verbose=False)
 # You can test your results by uncommenting this line:
-# print forward_chain(family_rules, simpsons_data, verbose=True)
+print forward_chain(family_rules, simpsons_data, verbose=True)
 
 black_data = ("male sirius",
               "male regulus",
