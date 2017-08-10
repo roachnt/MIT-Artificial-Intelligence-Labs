@@ -15,7 +15,15 @@ from zookeeper import ZOOKEEPER_RULES
 
 
 def backchain_to_goal_tree(rules, hypothesis):
-    raise NotImplementedError
+    result = [hypothesis]
+    for rule in rules:
+        consequent = rule.consequent()
+        for expr in consequent:
+            bindings = match(expr, hypothesis)
+            if bindings or expr == hypothesis:
+                antecedents = rule.antecendent()
+                
+            
 
 # Here's an example of running the backward chainer - uncomment
 # it to see it work:
