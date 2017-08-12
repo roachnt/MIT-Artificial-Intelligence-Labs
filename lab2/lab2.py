@@ -44,14 +44,17 @@ def bfs(graph, start, goal):
     queue.append([start])
     while queue:
         path = queue.pop(0)
+            
         
         last_node = path[-1]
+        
+        if last_node == goal:
+                return path
+                
         for node in graph.get_connected_nodes(last_node):
             new_path = []
             new_path.extend(path)
             new_path.append(node)
-            if node == goal:
-                return path
             queue.append(new_path)
             
         
@@ -59,7 +62,23 @@ def bfs(graph, start, goal):
 ## Once you have completed the breadth-first search,
 ## this part should be very simple to complete.
 def dfs(graph, start, goal):
-    raise NotImplementedError
+    queue = []
+    queue.append([start])
+    while queue:
+        path = queue.pop()
+            
+        
+        last_node = path[-1]
+        
+        if last_node == goal:
+                return path
+                
+        for node in graph.get_connected_nodes(last_node):
+            if node not in path:
+                new_path = []
+                new_path.extend(path)
+                new_path.append(node)
+                queue.append(new_path)
 
 
 ## Now we're going to add some heuristics into the search.  
