@@ -366,7 +366,6 @@ make_test(type = 'FUNCTION',
 
 
 ### TEST 11 ###
-print hill_climbing(NEWGRAPH1, 'G', 'H')
 def hill_climbing_2_getargs():
     return [ NEWGRAPH1, 'F', 'G' ]
 
@@ -383,6 +382,7 @@ make_test(type = 'FUNCTION',
 
 ### TEST 12 ###
 
+print hill_climbing(NEWGRAPH2, 'G', 'H')
 def hill_climbing_3_getargs():
     return [ NEWGRAPH1, 'H', 'G' ]
 
