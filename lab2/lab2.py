@@ -52,10 +52,11 @@ def bfs(graph, start, goal):
                 return path
                 
         for node in graph.get_connected_nodes(last_node):
-            new_path = []
-            new_path.extend(path)
-            new_path.append(node)
-            queue.append(new_path)
+            if node not in path:
+                new_path = []
+                new_path.extend(path)
+                new_path.append(node)
+                queue.append(new_path)
             
         
         
@@ -85,7 +86,30 @@ def dfs(graph, start, goal):
 ## Remember that hill-climbing is a modified version of depth-first search.
 ## Search direction should be towards lower heuristic values to the goal.
 def hill_climbing(graph, start, goal):
-    raise NotImplementedError
+    queue = []
+    heuristics_list = graph.heuristic[goal]
+    nodes_with_heuristics = [graph.heuristic[x] for x in graph.heuristic]
+    heuristics_list[goal] = 0
+    queue.append((heuristics_list[start], [start]))
+    
+    while queue:
+        distance, path = queue.pop()
+            
+        last_node = path[-1]
+        
+        if last_node == goal:
+                return path
+                
+        for node in graph.get_connected_nodes(last_node):
+            if node not in path:
+                new_path = []
+                new_path.extend(path)
+                new_path.append(node)
+                if node in heuristics_list:
+                    queue.append((heuristics_list[node], new_path))
+                else:
+                    queue.append((heuristics_list[last_node], new_path))
+                queue.sort(reverse=True)
 
 ## Now we're going to implement beam search, a variation on BFS
 ## that caps the amount of memory used to store paths.  Remember,
