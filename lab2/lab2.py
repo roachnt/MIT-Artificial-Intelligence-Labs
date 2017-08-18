@@ -1,3 +1,4 @@
+# Nicklaus Roach
 # Fall 2012 6.034 Lab 2: Search
 #
 # Your answers for the true and false questions will be in the following form.  
