@@ -3,7 +3,7 @@
 from search import *
 from graphs import *
 from tester import make_test, get_tests
-from lab2 import bfs, dfs, hill_climbing
+from lab2 import bfs, dfs, hill_climbing, beam_search
 import random
 import time
 
@@ -382,7 +382,7 @@ make_test(type = 'FUNCTION',
 
 ### TEST 12 ###
 
-print hill_climbing(NEWGRAPH2, 'G', 'H')
+
 def hill_climbing_3_getargs():
     return [ NEWGRAPH1, 'H', 'G' ]
 
