@@ -3,7 +3,7 @@
 from search import *
 from graphs import *
 from tester import make_test, get_tests
-from lab2 import bfs, dfs, hill_climbing, beam_search, branch_and_bound
+from lab2 import bfs, dfs, hill_climbing, beam_search, branch_and_bound, a_star
 import random
 import time
 
@@ -614,7 +614,7 @@ make_test(type = 'FUNCTION',
 
 
 ### TEST 24 ###
-print branch_and_bound(NEWGRAPH4, 'S', 'T')
+
 def branch_and_bound_6_getargs():
     return [NEWGRAPH4, "S", "T"]
 
@@ -718,6 +718,8 @@ make_test(type = 'FUNCTION',
 
 ### TEST 30 ###
 
+print a_star(NEWGRAPH4, 'S', 'T')
+print (time.time() - time1)
 def a_star_test_6_getargs():
     return [NEWGRAPH4, "S", "T"]
 

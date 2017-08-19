@@ -181,7 +181,6 @@ def branch_and_bound(graph, start, goal):
             
 
 def a_star(graph, start, goal):
-    extended_set = []
     queue = [(graph.get_heuristic(start, goal), [start])]
     
     while queue:
@@ -196,10 +195,24 @@ def a_star(graph, start, goal):
                 new_path.extend(path)
                 new_path.append(neighbor)
                 new_cost = graph.get_heuristic(neighbor, goal) + path_length(graph, new_path)
-                queue.append((new_cost, new_path))
+                
+                if find_path_with_neighbor(queue, neighbor):
+                    other_neighbor_cost, other_neighbor_path = find_path_with_neighbor(queue, neighbor)
+                    other_neighbor_index = other_neighbor_path.index(neighbor)
+                    other_neighbor_path_length = path_length(graph, other_neighbor_path[:other_neighbor_index + 1])
+                    if other_neighbor_path_length > path_length(graph, new_path):
+                        queue.remove((other_neighbor_cost, other_neighbor_path))
+                        queue.append((new_cost, new_path))
+                else:
+                    queue.append((new_cost, new_path))
+        queue.sort()        
             # check if neighbor shows up in more than one path, if yes then remove
             # the path with the longer distance from start to neighbor
-            
+def find_path_with_neighbor(queue, neighbor):
+    for cost, path in queue:
+        if neighbor in path:
+            return cost, path
+    
             
         
 
