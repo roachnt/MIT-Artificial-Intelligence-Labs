@@ -191,9 +191,15 @@ def a_star(graph, start, goal):
         last_node = path[-1]
         neighbors = graph.get_connected_nodes(last_node)
         for neighbor in neighbors:
-            new_path = []
-            new_path.extend(path)
-            new_path.append(neighbor)
+            if neighbor not in path:
+                new_path = []
+                new_path.extend(path)
+                new_path.append(neighbor)
+                new_cost = graph.get_heuristic(neighbor, goal) + path_length(graph, new_path)
+                queue.append((new_cost, new_path))
+            # check if neighbor shows up in more than one path, if yes then remove
+            # the path with the longer distance from start to neighbor
+            
             
         
 
