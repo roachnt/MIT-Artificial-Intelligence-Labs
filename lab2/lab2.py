@@ -181,7 +181,21 @@ def branch_and_bound(graph, start, goal):
             
 
 def a_star(graph, start, goal):
-    raise NotImplementedError
+    extended_set = []
+    queue = [(graph.get_heuristic(start, goal), [start])]
+    
+    while queue:
+        cost, path = queue.pop(0)
+        if goal in path:
+            return path
+        last_node = path[-1]
+        neighbors = graph.get_connected_nodes(last_node)
+        for neighbor in neighbors:
+            new_path = []
+            new_path.extend(path)
+            new_path.append(neighbor)
+            
+        
 
 
 ## It's useful to determine if a graph has a consistent and admissible
