@@ -206,8 +206,7 @@ def a_star(graph, start, goal):
                 else:
                     queue.append((new_cost, new_path))
         queue.sort()        
-            # check if neighbor shows up in more than one path, if yes then remove
-            # the path with the longer distance from start to neighbor
+        
 def find_path_with_neighbor(queue, neighbor):
     for cost, path in queue:
         if neighbor in path:
@@ -223,10 +222,27 @@ def find_path_with_neighbor(queue, neighbor):
 ## consistent, but not admissible?
 
 def is_admissible(graph, goal):
-    raise NotImplementedError
+    all_nodes = []
+    all_nodes.extend(graph.nodes)
+    for node in all_nodes:
+        heuristic = graph.get_heuristic(node, goal)
+        path = a_star(graph, node, goal)
+        length = path_length(graph, path)
+        if heuristic > length:
+            return False
+    return True
 
 def is_consistent(graph, goal):
-    raise NotImplementedError
+    all_edges = graph.edges
+    for edge in all_edges:
+        node1 = edge.node1
+        node2 = edge.node2
+        heuristic1 = graph.get_heuristic(node1, goal)
+        heuristic2 = graph.get_heuristic(node2, goal)
+        heuristic_diff = abs(heuristic1 - heuristic2)
+        if heuristic_diff > edge.length:
+            return False
+    return True
 
 HOW_MANY_HOURS_THIS_PSET_TOOK = ''
 WHAT_I_FOUND_INTERESTING = ''
