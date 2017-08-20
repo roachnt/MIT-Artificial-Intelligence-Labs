@@ -180,9 +180,8 @@ def branch_and_bound(graph, start, goal):
         queue.sort()       
             
 
-def a_star(graph, start, goal):
+def a_star2(graph, start, goal):
     queue = [(graph.get_heuristic(start, goal), [start])]
-    
     while queue:
         cost, path = queue.pop(0)
         if goal in path:
@@ -196,21 +195,34 @@ def a_star(graph, start, goal):
                 new_path.append(neighbor)
                 new_cost = graph.get_heuristic(neighbor, goal) + path_length(graph, new_path)
                 
-                if find_path_with_neighbor(queue, neighbor):
-                    other_neighbor_cost, other_neighbor_path = find_path_with_neighbor(queue, neighbor)
-                    other_neighbor_index = other_neighbor_path.index(neighbor)
-                    other_neighbor_path_length = path_length(graph, other_neighbor_path[:other_neighbor_index + 1])
-                    if other_neighbor_path_length > path_length(graph, new_path):
-                        queue.remove((other_neighbor_cost, other_neighbor_path))
-                        queue.append((new_cost, new_path))
-                else:
+                if not find_path_with_neighbor(queue, neighbor):
                     queue.append((new_cost, new_path))
         queue.sort()        
+
+def a_star(graph, start, goal):
+    queue = [(graph.get_heuristic(start, goal), [start])]
+    extended_list = []
+    while queue:
+        cost, path = queue.pop(0)
+        if goal in path:
+            return path
+        last_node = path[-1]
+        if last_node not in extended_list:
+            extended_list.append(last_node)
+            neighbors = graph.get_connected_nodes(last_node)
+            for neighbor in neighbors:
+                if neighbor not in path:
+                    new_path = []
+                    new_path.extend(path)
+                    new_path.append(neighbor)
+                    new_cost = graph.get_heuristic(neighbor, goal) + path_length(graph, new_path)
+                    queue.append((new_cost, new_path))
+        queue.sort()   
         
 def find_path_with_neighbor(queue, neighbor):
     for cost, path in queue:
         if neighbor in path:
-            return cost, path
+            return True
     
             
         

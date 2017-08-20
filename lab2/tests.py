@@ -3,7 +3,7 @@
 from search import *
 from graphs import *
 from tester import make_test, get_tests
-from lab2 import bfs, dfs, hill_climbing, beam_search, branch_and_bound, a_star, is_admissible, is_consistent
+from lab2 import bfs, dfs, hill_climbing, beam_search, branch_and_bound, a_star, a_star2, is_admissible, is_consistent
 import random
 import time
 
@@ -662,6 +662,23 @@ make_test(type = 'FUNCTION',
 
 
 ### TEST 27 ###
+
+print "A* changed:"
+time1 = time.time()
+print a_star(NEWGRAPH4, 'S', 'T')
+print time.time() - time1
+
+print ''
+print "A* original:"
+time1 = time.time()
+print a_star2(NEWGRAPH4, 'S', 'T')
+print time.time() - time1
+
+print ''
+print "Branch and bound:"
+time2 = time.time()
+print branch_and_bound(NEWGRAPH4, 'S', 'T')
+print time.time() - time2
 
 def a_star_3_getargs():
     return [ NEWGRAPH2, 'S', 'G' ]
